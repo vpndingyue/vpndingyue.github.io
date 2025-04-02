@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+        <link rel="canonical" href="https://vpndingyue.github.io/news/article-86776.htm" />
+    <!-- Required Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Document Title, Description, and Author -->
+    <title>Promise和async/await的区别</title>
+        <meta name="description" content="【JavaScript】Promise和async/await的区别  Promise async/await async/await 比 Promise 更省内存？ 总结    Promise 是一" />
+        <link rel="icon" href="/assets/website/img/windowsclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN订阅 推荐VPN免费节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpndingyue.github.io/news/article-86776.htm" />
+    <meta property="og:site_name" content="VPN订阅 推荐VPN免费节点订阅官网" />
+    <meta property="og:title" content="Promise和async/await的区别" />
+    <meta property="og:image" content="https://vpndingyue.github.io/uploads/20240618/4aebf4e4bcdc916ee389e1be37697673.webp" />
+        <meta property="og:release_date" content="2025-04-02T07:44:28" />
+    <meta property="og:updated_time" content="2025-04-02T07:44:28" />
+        <meta property="og:description" content="【JavaScript】Promise和async/await的区别  Promise async/await async/await 比 Promise 更省内存？ 总结    Promise 是一" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Promise和async/await的区别">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Fonts Files -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/website/css/windowsclashnode/hello-bsb.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JVF6X0RN8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JVF6X0RN8N');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#bsb-tpl-navbar" data-bs-smooth-scroll="true" tabindex="0" data-page="detail">
+        <!-- Header -->
+    <header id="header" class="sticky-top bsb-tpl-header-sticky bsb-tpl-header-sticky-animationX">
+        <!-- Navbar 1 - Bootstrap Brain Component -->
+        <nav id="scrollspyNav" class="navbar navbar-expand-lg bsb-tpl-bg-alabaster bsb-navbar bsb-navbar-hover bsb-navbar-caret bsb-tpl-navbar-sticky" data-bsb-sticky-target="#header">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                                <span>VPN订阅</span>
+                                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul id="bsb-tpl-navbar" class="navbar-nav justify-content-end flex-grow-1">
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/">首页</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/free-nodes/">免费节点</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/news/">新闻资讯</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/client.htm">客户端</a>
+                            </li>
+                                                    </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero 3 - Bootstrap Brain Component -->
+    <section id="scrollspyHero" class="bsb-tpl-bg-alabaster pt-3 pt-xl-2 list">
+        <div class="container overflow-hidden">
+            <div class="row gy-5 gy-lg-0">
+                <div class="col-12 col-lg-6 slogan">
+                    <h1 class="display-3 fw-bold mb-3">Promise和async/await的区别 </h1>
+                    <p class="fs-4 mb-5">
+                        <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / <span>正文</span>
+                    </p>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="position-relative">
+                        <div class="bsb-circle border border-4 border-accent position-absolute top-50 start-10 translate-middle z-1"></div>
+                        <div class="bsb-circle bg-primary position-absolute top-50 start-50 translate-middle" style="--bsb-cs: 460px;"></div>
+                        <div class="bsb-circle border border-4 border-accent position-absolute top-10 end-0 z-1" style="--bsb-cs: 100px;"></div>
+                        <img class="img-fluid position-relative z-2" loading="lazy" href="/assets/website/img/windowsclashnode/hero/hero-img-1.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main -->
+    <main id="main">
+        <!-- Process 1 - Bootstrap Brain Component -->
+        <section id="scrollspyAbout" class="py-5 py-xl-8 py-xxl-16">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>【JavaScript】Promise和async/await的区别</h3> <ul> <li><a href="#Promise_2" rel="nofollow">Promise</a></li> <li><a href="#asyncawait_5" rel="nofollow">async/await</a></li> <li><a href="#asyncawait__Promise__17" rel="nofollow">async/await 比 Promise 更省内存？</a></li> <li><a href="#_21" rel="nofollow">总结</a></li> </ul> </div> </h1> <p><code>Promise</code> 是一种异步编程机制，为异步代码提供了清晰的抽象。解决了代码越来越复杂，回调策略可扩展性越来越差的问题。</p> </h1> <p><code>async/await</code> 是ES8的关键字，是异步函数，将<code>Promise</code> 应用于<code>JavaScript</code> 函数的结果，让同步方式写的代码能异步执行。<br /> 旨在解决利用异步结构组织代码的问题。</p> <p><code>async</code> 关键字用于声明异步函数，且异步函数始终返回<code>Promise</code> 对象，如果异步函数使用<code>return</code> 关键字，则异步函数的返回值会被<code>Promise.resolve()</code> 包装成一个<code>Promise</code> 对象。</p> <p><code>await</code> 关键字会暂停执行异步函数后面的代码，<code>JavaScript</code> 运行时记录暂停执行的位置并让出执行线程，等到<code>await</code> 右边的值可用时，<code>JavaScript</code> 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。</p> <p><code>await</code> 关键字必须在异步函数中使用，且只能直接出现在异步函数的定义中。</p> <p>在<code>async/await</code> 关键字中，<code>async</code> 仅仅是一个标识符，起作用的是<code>await</code> 关键字，如果异步函数不包含<code>await</code> 关键字，基本上跟普通函数一样。</p> </h1> <p><code>JavaScript</code> 引擎在创建<code>Promise</code> 时会尽可能的保留完整的调用栈。在抛出错误时，调用栈由运行时错误处理逻辑获取，并出现在栈追踪信息中。而栈追踪信息会占用内存，有一些计算和存储成本。<br /> 当使用<code>async/await</code> 时，栈追踪信息不会记录await后抛出的错误，因为异步函数内部嵌套函数中存储着指向包含函数的指针，故栈追踪信息不会带来额外的消耗。所以，<code>async/await</code> 更省内存。</p> </h1> <ul> <li><code>Promise</code> 的主要功能是为异步代码提供了清晰的抽象。</li> <li>异步函数是将<code>Promise</code> 应用于<code>JavaScript</code> 函数的结果。异步函数可以暂停执行，而不阻塞主线程。</li> <li>推荐使用<code>await/async</code>。</li> </ul> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86065.htm">狗狗领养条例最新（狗狗领养条件国际惯例）</a></p>
+                                        <p>下一个：<a href="/news/article-86777.htm">成都宠物托运价格表查询官网（成都宠物托运价格表查询官网）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-28-node-share.htm" title="VPN订阅 | 3月28日21.9M/S|免费Clash/Shadowrocket/V2ray/SSR订阅节点分享">VPN订阅 | 3月28日21.9M/S|免费Clash/Shadowrocket/V2ray/SSR订阅节点分享</a></li>
+                        <li class="py-2"><a href="/news/article-77668.htm" title="深圳宝安领养狗狗群（深圳狗狗领养送养中心）">深圳宝安领养狗狗群（深圳狗狗领养送养中心）</a></li>
+                        <li class="py-2"><a href="/news/article-86064.htm" title="中国十大品牌兽药批发（中国十大名牌兽药厂家）">中国十大品牌兽药批发（中国十大名牌兽药厂家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-30-free-v2ray-subscribe.htm" title="VPN订阅 | 3月30日18.2M/S|免费Clash/SSR/Shadowrocket/V2ray订阅节点分享">VPN订阅 | 3月30日18.2M/S|免费Clash/SSR/Shadowrocket/V2ray订阅节点分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-21-free-subscribe-node.htm" title="VPN订阅 | 3月21日21.8M/S|免费Shadowrocket/V2ray/SSR/Clash订阅节点分享">VPN订阅 | 3月21日21.8M/S|免费Shadowrocket/V2ray/SSR/Clash订阅节点分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-26-clash-v2ray-ss-ssr.htm" title="VPN订阅 | 3月26日19.1M/S|免费SSR/V2ray/Clash/Shadowrocket订阅节点分享">VPN订阅 | 3月26日19.1M/S|免费SSR/V2ray/Clash/Shadowrocket订阅节点分享</a></li>
+                        <li class="py-2"><a href="/news/article-74959.htm" title="上海宠物领养活动 上海宠物领养活动有哪些">上海宠物领养活动 上海宠物领养活动有哪些</a></li>
+                        <li class="py-2"><a href="/news/article-76300.htm" title="动物疫苗官网首页网站下载（动物疫苗查询系统）">动物疫苗官网首页网站下载（动物疫苗查询系统）</a></li>
+                        <li class="py-2"><a href="/news/article-85343.htm" title="分享两个实用的shell脚本">分享两个实用的shell脚本</a></li>
+                        <li class="py-2"><a href="/news/article-86777.htm" title="成都宠物托运价格表查询官网（成都宠物托运价格表查询官网）">成都宠物托运价格表查询官网（成都宠物托运价格表查询官网）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+        <!-- Footer 3 - Bootstrap Brain Component -->
+    <footer class="footer">
+        <div class="border-top py-4 py-md-5 py-xl-8">
+            <div class="container overflow-hidden">
+                <div class="row gy-4 gy-md-0">
+                    <div class="col-xs-12 col-md-12 order-2 order-md-1">
+                        <div class="footer-copyright-wrapper text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            VPN订阅 推荐VPN免费节点订阅官网 版权所有 Powered by WordPress
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/website/js/frontend/windowsclashnode/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/windowsclashnode/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Javascript Files: Controllers -->
+    <script src="/assets/website/js/frontend/windowsclashnode/global.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
