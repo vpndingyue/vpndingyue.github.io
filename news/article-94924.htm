@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+        <link rel="canonical" href="https://vpndingyue.github.io/news/article-94924.htm" />
+    <!-- Required Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Document Title, Description, and Author -->
+    <title>@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验</title>
+        <meta name="description" content="文章目录  1. 问题说明 2. 配置依赖 3. 编写注解的bean 4. 常用注解说明   4.1 空检查 4.2 布尔检查 4.3 长度检查 4.4 日期检查 4.5 数值检查   5. 编写co" />
+        <link rel="icon" href="/assets/website/img/windowsclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN订阅 推荐VPN免费节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpndingyue.github.io/news/article-94924.htm" />
+    <meta property="og:site_name" content="VPN订阅 推荐VPN免费节点订阅官网" />
+    <meta property="og:title" content="@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验" />
+    <meta property="og:image" content="https://vpndingyue.github.io/uploads/20240618/352dd3ac1f40b652ecede8734f64374a.webp" />
+        <meta property="og:release_date" content="2025-04-13T07:18:52" />
+    <meta property="og:updated_time" content="2025-04-13T07:18:52" />
+        <meta property="og:description" content="文章目录  1. 问题说明 2. 配置依赖 3. 编写注解的bean 4. 常用注解说明   4.1 空检查 4.2 布尔检查 4.3 长度检查 4.4 日期检查 4.5 数值检查   5. 编写co" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Fonts Files -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/website/css/windowsclashnode/hello-bsb.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JVF6X0RN8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JVF6X0RN8N');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#bsb-tpl-navbar" data-bs-smooth-scroll="true" tabindex="0" data-page="detail">
+        <!-- Header -->
+    <header id="header" class="sticky-top bsb-tpl-header-sticky bsb-tpl-header-sticky-animationX">
+        <!-- Navbar 1 - Bootstrap Brain Component -->
+        <nav id="scrollspyNav" class="navbar navbar-expand-lg bsb-tpl-bg-alabaster bsb-navbar bsb-navbar-hover bsb-navbar-caret bsb-tpl-navbar-sticky" data-bsb-sticky-target="#header">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                                <span>VPN订阅</span>
+                                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul id="bsb-tpl-navbar" class="navbar-nav justify-content-end flex-grow-1">
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/">首页</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/free-nodes/">免费节点</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/news/">新闻资讯</a>
+                            </li>
+                                                        <li class="nav-item">
+                                <a class="nav-link" href="/client.htm">客户端</a>
+                            </li>
+                                                    </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero 3 - Bootstrap Brain Component -->
+    <section id="scrollspyHero" class="bsb-tpl-bg-alabaster pt-3 pt-xl-2 list">
+        <div class="container overflow-hidden">
+            <div class="row gy-5 gy-lg-0">
+                <div class="col-12 col-lg-6 slogan">
+                    <h1 class="display-3 fw-bold mb-3">@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验 </h1>
+                    <p class="fs-4 mb-5">
+                        <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / <span>正文</span>
+                    </p>
+                </div>
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="position-relative">
+                        <div class="bsb-circle border border-4 border-accent position-absolute top-50 start-10 translate-middle z-1"></div>
+                        <div class="bsb-circle bg-primary position-absolute top-50 start-50 translate-middle" style="--bsb-cs: 460px;"></div>
+                        <div class="bsb-circle border border-4 border-accent position-absolute top-10 end-0 z-1" style="--bsb-cs: 100px;"></div>
+                        <img class="img-fluid position-relative z-2" loading="lazy" href="/assets/website/img/windowsclashnode/hero/hero-img-1.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main -->
+    <main id="main">
+        <!-- Process 1 - Bootstrap Brain Component -->
+        <section id="scrollspyAbout" class="py-5 py-xl-8 py-xxl-16">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#1__2" rel="nofollow">1. 问题说明</a></li> <li><a href="#2__25" rel="nofollow">2. 配置依赖</a></li> <li><a href="#3_bean_34" rel="nofollow">3. 编写注解的bean</a></li> <li><a href="#4__70" rel="nofollow">4. 常用注解说明</a></li> <li> <ul> <li><a href="#41__72" rel="nofollow">4.1 空检查</a></li> <li><a href="#42__80" rel="nofollow">4.2 布尔检查</a></li> <li><a href="#43__86" rel="nofollow">4.3 长度检查</a></li> <li><a href="#44__92" rel="nofollow">4.4 日期检查</a></li> <li><a href="#45__99" rel="nofollow">4.5 数值检查</a></li> </ul> </li> <li><a href="#5_controller_112" rel="nofollow">5. 编写controller</a></li> <li> <ul> <li><a href="#51_ValidatedValid_162" rel="nofollow">5.1 @Validated和@Valid区别</a></li> </ul> </li> <li><a href="#6_NotBlank_171" rel="nofollow">6. 解决@NotBlank等注解不生效的问题</a></li> <li><a href="#7__191" rel="nofollow">7. 其他注解说明</a></li> </ul> </div> </h1> <p>服务端通常将<code>controller层</code>作为调用的第一层，因而参数校验常常在这里完成，比如非空校验、类型校验等，如下登录接口代码所示：</p> <pre><code class="prism language-java"> <span class="token comment">/**    * 登录接口    *    * @author 念兮为美    * @datetime 2022/8/11:13:41    */</span>   <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">)</span>   <span class="token keyword">public</span> <span class="token class-name">JSONObject</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">UserLoginDto</span> userLogin<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token class-name">String</span> password <span class="token operator">=</span> userLogin<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token class-name">JSONObject</span> jsonObject<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">JSONObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> password <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"success"</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span><span class="token string">"密码不能为空"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token keyword">return</span>  jsonObject<span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>   <span class="token punctuation">}</span> </code></pre> <p>假如在<code>controller层</code>的某个方法中，有很多个需要校验的请求参数，这样写无疑会有多条<code>if判断语句</code>，因而，我们需要使用优雅的方式处理接口请求参数。</p> </h1> <p>前提是需要在<code>pom</code>文件中增加如下依赖：</p> <pre><code class="prism language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>     <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>javax<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>     <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>javaee<span class="token operator">-</span>api<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>     <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">8.0</span><span class="token number">.1</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span> </code></pre> </h1> <p>依赖配置好后，编写需要注解的bean，如下代码所示：</p> <pre><code class="prism language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>superjson<span class="token punctuation">.</span>superjsonmanager<span class="token punctuation">.</span>dto</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span></span><span class="token class-name">AllArgsConstructor</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span></span><span class="token class-name">Data</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span></span><span class="token class-name">NoArgsConstructor</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>validation<span class="token punctuation">.</span>constraints<span class="token punctuation">.</span></span><span class="token class-name">NotBlank</span><span class="token punctuation">;</span>   <span class="token comment">/**  * @author 念兮为美  * @datetime 2022/8/5 21:34  * @desc 用户登录请求参数  */</span> <span class="token annotation punctuation">@AllArgsConstructor</span> <span class="token annotation punctuation">@NoArgsConstructor</span> <span class="token annotation punctuation">@Data</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserLoginDto</span> <span class="token punctuation">{<!-- --></span>   <span class="token comment">/** 密码 */</span>   <span class="token annotation punctuation">@NotBlank</span><span class="token punctuation">(</span>message <span class="token operator">=</span> <span class="token string">"密码不能为空"</span><span class="token punctuation">)</span>   <span class="token keyword">private</span> <span class="token class-name">String</span> password<span class="token punctuation">;</span>    <span class="token comment">/** 类型 */</span>   <span class="token annotation punctuation">@NotBlank</span><span class="token punctuation">(</span>message <span class="token operator">=</span> <span class="token string">"登录类型不能为空"</span><span class="token punctuation">)</span>   <span class="token keyword">private</span> <span class="token class-name">String</span> type<span class="token punctuation">;</span>    <span class="token comment">/** 用户名 */</span>   <span class="token annotation punctuation">@NotBlank</span><span class="token punctuation">(</span>message <span class="token operator">=</span> <span class="token string">"账号不能为空"</span><span class="token punctuation">)</span>   <span class="token keyword">private</span> <span class="token class-name">String</span> username<span class="token punctuation">;</span> <span class="token punctuation">}</span>  </code></pre> </h1> <p>我们常用的注解有<code>@NotBlank 、@NotEmpty、@NotNull </code>等，当然，我们也有可能用到其他注解来检查属性。</p> <h2> <a id="41__72" rel="nofollow"></a>4.1 空检查</h2> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@Null</td> <td>检查对象是否为null。</td> </tr> <tr> <td>@NotNull</td> <td>检查对象是否不为null，无法查检长度为0的字符串。</td> </tr> <tr> <td>@NotBlank</td> <td>检查约束字符串是不是Null还有被Trim的长度是否大于0，只对字符串,且会去掉前后空格。</td> </tr> <tr> <td>@NotEmpty</td> <td>检查约束元素是否为NULL或者是EMPTY。</td> </tr> </tbody> </table> <h2> <a id="42__80" rel="nofollow"></a>4.2 布尔检查</h2> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@AssertTrue</td> <td>检查 Boolean 对象是否为 true。</td> </tr> <tr> <td>@AssertFalse</td> <td>检查 Boolean 对象是否为 false。</td> </tr> </tbody> </table> <h2> <a id="43__86" rel="nofollow"></a>4.3 长度检查</h2> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@Size(min=, max=)</td> <td>检查对象<code>(Array,Collection,Map,String)</code>长度是否在给定的范围之内 。</td> </tr> <tr> <td>@Length(min=, max=)</td> <td>检查字符串<code>(String)</code>长度是否在给定的范围之内。</td> </tr> </tbody> </table> <h2> <a id="44__92" rel="nofollow"></a>4.4 日期检查</h2> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@Past</td> <td>检查<code>Date</code>和<code>Calendar</code>对象是否在当前时间之前 。</td> </tr> <tr> <td>@Future</td> <td>检查<code>Date</code>和<code>Calendar</code>对象是否在当前时间之后 。</td> </tr> <tr> <td>@Pattern</td> <td>检查<code>String</code>对象是否符合正则表达式的规则。</td> </tr> </tbody> </table> <h2> <a id="45__99" rel="nofollow"></a>4.5 数值检查</h2> <p>建议在<code>Stirng和Integer类型</code>使用，不建议在<code>int类型</code>上使用。因为表单值为<code>“”</code>时无法转换为int，但可以转换为Stirng为""，Integer为null。</p> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@Min</td> <td>检查 Number 和 String 对象是否大等于指定的值 。</td> </tr> <tr> <td>@Max</td> <td>检查 Number 和 String 对象是否小等于指定的值 。</td> </tr> <tr> <td>@DecimalMax</td> <td>被标注的值必须不大于约束中指定的最大值。 这个约束的参数是一个通过<code>BigDecimal</code>定义的最大值的字符串表示.小数存在精度。</td> </tr> <tr> <td>@DecimalMin</td> <td>被标注的值必须不小于约束中指定的最小值.。这个约束的参数是一个通过<code>BigDecimal</code>定义的最小值的字符串表示.小数存在精度。</td> </tr> <tr> <td>@Digits</td> <td>检查 Number 和 String 的构成是否合法 。</td> </tr> <tr> <td>@Digits(integer=,fraction=)</td> <td>检查字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</td> </tr> <tr> <td>@Range(min=, max=)</td> <td>检查数字是否介于min和max之间。</td> </tr> </tbody> </table> </h1> <p>我们在bean中通过注解定义好类之后，需要在controller层加上<code>@Validated</code>和<code>BindingResult</code>参数，如下代码所示：</p> <pre><code class="prism language-java"> <span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>superjson<span class="token punctuation">.</span>superjsonmanager<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson<span class="token punctuation">.</span></span><span class="token class-name">JSONObject</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>superjson<span class="token punctuation">.</span>superjsonmanager<span class="token punctuation">.</span>dto<span class="token punctuation">.</span></span><span class="token class-name">UserLoginDto</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>superjson<span class="token punctuation">.</span>superjsonmanager<span class="token punctuation">.</span>service<span class="token punctuation">.</span></span><span class="token class-name">UserService</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Autowired</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>validation<span class="token punctuation">.</span></span><span class="token class-name">BindingResult</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>validation<span class="token punctuation">.</span></span><span class="token class-name">FieldError</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>validation<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Validated</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PostMapping</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestBody</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RestController</span><span class="token punctuation">;</span>  <span class="token comment">/**  * @author 念兮为美  * @datetime 2022/8/5 21:30  * @desc 用户登录控制器  */</span> <span class="token annotation punctuation">@RestController</span> <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token punctuation">{<!-- --></span>    <span class="token annotation punctuation">@Autowired</span> <span class="token keyword">private</span> <span class="token class-name">UserService</span> userService<span class="token punctuation">;</span>    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">)</span>   <span class="token keyword">public</span> <span class="token class-name">JSONObject</span> <span class="token function">login</span><span class="token punctuation">(</span>       <span class="token annotation punctuation">@Validated</span> <span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">UserLoginDto</span> userLogin<span class="token punctuation">,</span> <span class="token class-name">BindingResult</span> bindingResult<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">if</span> <span class="token punctuation">(</span>bindingResult<span class="token punctuation">.</span><span class="token function">hasErrors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>       <span class="token class-name">JSONObject</span> jsonObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JSONObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token class-name">FieldError</span> fieldError <span class="token operator">=</span> bindingResult<span class="token punctuation">.</span><span class="token function">getFieldError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//获取出错的属性</span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"field"</span><span class="token punctuation">,</span> fieldError<span class="token punctuation">.</span><span class="token function">getField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//获取出错的注解名字，比如notBlank，notNull等</span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">,</span> fieldError<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//获取出错的对象名称</span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"objectName"</span><span class="token punctuation">,</span> fieldError<span class="token punctuation">.</span><span class="token function">getObjectName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//获取错误的信息</span>       jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> fieldError<span class="token punctuation">.</span><span class="token function">getDefaultMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token keyword">throw</span> <span class="token keyword">new</span> 你自定义的异常<span class="token punctuation">(</span><span class="token string">"参数请求异常："</span> <span class="token operator">+</span> fieldError<span class="token punctuation">.</span><span class="token function">getDefaultMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">getByUsernameAndPassword</span><span class="token punctuation">(</span>             userLogin<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> userLogin<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> userLogin<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <h2> <a id="51_ValidatedValid_162" rel="nofollow"></a>5.1 @Validated和@Valid区别</h2> <ol> <li> <p>@Valid 和 @Validated 两者都可以对数据进行校验，待校验字段上打的规则注解（@NotNull, @NotEmpty等）都可以对 @Valid 和 @Validated 生效；</p> </li> <li> <p>@Valid 进行校验的时候，需要用 BindingResult 来做一个校验结果接收。当校验不通过的时候，如果手动不 return ，则并不会阻止程序的执行；</p> </li> <li> <p>@Validated 进行校验的时候，当校验不通过的时候，程序会抛出400异常，阻止方法中的代码执行，这时需要再写一个全局校验异常捕获处理类，然后返回校验提示。</p> </li> <li> <p>总体来说，@Validated 使用起来要比 @Valid 方便一些，它可以帮我们节省一定的代码，并且使得方法看上去更加的简洁。</p> </li> </ol> </h1> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230109/c3b10f12801ef4910360ebcaa263211f.jpg" alt="@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验"></p> <p>在如上postman中，password和username都为空，按道理说，应该是报错的，但执行后并没有报错，如下图所示：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230109/0cdaf603c372b162fabf54d64cfd6db3.jpg" alt="@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验"></p> <p>根据上述<code>3. 编写需要注解的bean</code>可以看到，password和username都不为空，实际上应该有两个error，但现在是<code>0 error</code>，就不正常。</p> <p>实际上，我们少引用<code>hibernate-validator</code>这个依赖，只需要增加如下依赖即可：</p> <pre><code class="prism language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>   <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>hibernate<span class="token punctuation">.</span>validator<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>   <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>hibernate<span class="token operator">-</span>validator<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>   <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">6.2</span><span class="token number">.3</span><span class="token punctuation">.</span>Final<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span> </code></pre> <p>增加如下依赖之后，重启服务后运行。不仅能让<code>@NotBlank</code>注解生效，也可以让<code>@NotBlank</code>等注解生效，如下图所示：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230109/8cbc6efab5acfd78d9aff308791260f4.jpg" alt="@NotEmpty、@NotBlank等注解的正确使用 @Validated和@Valid的区别 解决@NotBlank等注解不生效的问题 使用BindingResult进行接口请求参数的统一校验"></p> </h1> <table> <thead> <tr> <th>注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>@Valid</td> <td>递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)。</td> </tr> <tr> <td>@CreditCardNumber</td> <td>信用卡验证。</td> </tr> <tr> <td>@Email</td> <td>验证是否是邮件地址，如果为null,不进行验证，算通过验证。</td> </tr> <tr> <td>@ScriptAssert(lang= ,script=, alias=)</td> <td>检查脚本语言是否符合预期</td> </tr> <tr> <td>@URL(protocol=,host=, port=,regexp=, flags=)</td> <td>检查URL是否符合预期</td> </tr> </tbody> </table> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-94323.htm">Sequelize入门——从零开始做一个小demo</a></p>
+                                        <p>下一个：<a href="/news/article-94925.htm">TypeError: Cannot read properties of undefined (reading ‘state‘)</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-free-node-subscribe.htm" title="VPN订阅 | 4月4日18.6M/S|免费V2ray/SSR/Shadowrocket/Clash订阅节点分享">VPN订阅 | 4月4日18.6M/S|免费V2ray/SSR/Shadowrocket/Clash订阅节点分享</a></li>
+                        <li class="py-2"><a href="/news/article-77669.htm" title="成都兽医站打疫苗多少钱啊（成都兽医站打疫苗多少钱啊）">成都兽医站打疫苗多少钱啊（成都兽医站打疫苗多少钱啊）</a></li>
+                        <li class="py-2"><a href="/news/article-93402.htm" title="学宠物医生要什么条件才能学（学宠物医生需要什么条件）">学宠物医生要什么条件才能学（学宠物医生需要什么条件）</a></li>
+                        <li class="py-2"><a href="/news/article-94322.htm" title="spring schedule 配置多任务动态 cron 【增删启停】">spring schedule 配置多任务动态 cron 【增删启停】</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-25-free-v2ray.htm" title="VPN订阅 | 3月25日21.7M/S|免费V2ray/Clash/SSR/Shadowrocket订阅节点分享">VPN订阅 | 3月25日21.7M/S|免费V2ray/Clash/SSR/Shadowrocket订阅节点分享</a></li>
+                        <li class="py-2"><a href="/news/article-92651.htm" title="狗粮猫粮加工设备什么牌子好一点（宠物狗粮加工设备）">狗粮猫粮加工设备什么牌子好一点（宠物狗粮加工设备）</a></li>
+                        <li class="py-2"><a href="/news/article-76982.htm" title="SpringBoot系列: url重定向和转发">SpringBoot系列: url重定向和转发</a></li>
+                        <li class="py-2"><a href="/news/article-80390.htm" title="哪些牌子的电脑属于国产的?哪些属于外国的呢(哪些电脑品牌是国外的)">哪些牌子的电脑属于国产的?哪些属于外国的呢(哪些电脑品牌是国外的)</a></li>
+                        <li class="py-2"><a href="/news/article-90971.htm" title="动物疫苗去哪里买的啊（动物疫苗证去哪里办怎么办）">动物疫苗去哪里买的啊（动物疫苗证去哪里办怎么办）</a></li>
+                        <li class="py-2"><a href="/news/article-87495.htm" title="猫咪多久驱虫一次（猫咪多久驱虫一次多少钱）">猫咪多久驱虫一次（猫咪多久驱虫一次多少钱）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">42</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+        <!-- Footer 3 - Bootstrap Brain Component -->
+    <footer class="footer">
+        <div class="border-top py-4 py-md-5 py-xl-8">
+            <div class="container overflow-hidden">
+                <div class="row gy-4 gy-md-0">
+                    <div class="col-xs-12 col-md-12 order-2 order-md-1">
+                        <div class="footer-copyright-wrapper text-center">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            VPN订阅 推荐VPN免费节点订阅官网 版权所有 Powered by WordPress
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/website/js/frontend/windowsclashnode/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/windowsclashnode/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Javascript Files: Controllers -->
+    <script src="/assets/website/js/frontend/windowsclashnode/global.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
